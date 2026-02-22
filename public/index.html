@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SEO Meta Tags ═══ -->
+  <title>Pinterest Video Downloader - Free HD Pinterest Videos & GIFs Download</title>
+  <meta name="description" content="Download Pinterest videos, GIFs, and images for free in HD quality. No watermark, no registration required. Fastest Pinterest video downloader online." />
+  <meta name="keywords" content="pinterest video downloader, download pinterest videos, pinterest downloader, save pinterest video, pinterest video download online, pinterest gif downloader, free pinterest downloader" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="PinSave - Pinterest Downloader" />
+  <link rel="canonical" href="https://yourdomain.com/" />
+
+  <!-- ═══ Open Graph ═══ -->
+  <meta property="og:title" content="Pinterest Video Downloader - Free HD Download" />
+  <meta property="og:description" content="Download any Pinterest video or GIF instantly. Free, fast, no watermark." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg" />
+
+  <!-- ═══ Twitter Card ═══ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Pinterest Video Downloader - Free HD Download" />
+  <meta name="twitter:description" content="Download any Pinterest video or GIF instantly. Free, fast, no watermark." />
+
+  <!-- ═══ Structured Data ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PinSave - Pinterest Video Downloader",
+    "description": "Free online tool to download Pinterest videos, GIFs and images in HD quality without watermark.",
+    "url": "https://yourdomain.com",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <!-- ═══ Fonts ═══ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══ CSS Variables ═══ */
+    :root {
+      --red:     #E60023;
+      --red-d:   #ad081b;
+      --red-glow:#ff002255;
+      --bg:      #0d0d0f;
+      --bg2:     #141417;
+      --bg3:     #1c1c21;
+      --border:  rgba(255,255,255,0.07);
+      --text:    #f0ede8;
+      --muted:   #8a8690;
+      --white:   #ffffff;
+      --radius:  16px;
+      --font-h:  'Syne', sans-serif;
+      --font-b:  'DM Sans', sans-serif;
+    }
+
+    /* ═══ Reset ═══ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-b);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; }
+
+    /* ═══ Scrollbar ═══ */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+    /* ═══ Background mesh ═══ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 10%, rgba(230,0,35,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(230,0,35,0.08) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══ Noise overlay ═══ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══ Layout ═══ */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* ═══ Navbar ═══ */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,13,15,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-h);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+    .logo-icon {
+      width: 32px; height: 32px;
+      background: var(--red);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+    .logo-icon svg { width: 18px; height: 18px; fill: white; }
+    .logo span { color: var(--red); }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+    .nav-links li a:hover { color: var(--text); }
+    @media(max-width: 600px) { .nav-links { display: none; } }
+
+    /* ═══ Hero ═══ */
+    .hero {
+      padding: 100px 0 60px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(230,0,35,0.1);
+      border: 1px solid rgba(230,0,35,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #ff6b7a;
+      margin-bottom: 28px;
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+    h1 {
+      font-family: var(--font-h);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 20px;
+      animation: fadeUp 0.5s 0.1s ease both;
+    }
+    h1 .accent {
+      color: var(--red);
+      position: relative;
+    }
+    h1 .accent::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--red), transparent);
+      border-radius: 2px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 560px;
+      margin: 0 auto 48px;
+      animation: fadeUp 0.5s 0.15s ease both;
+    }
+
+    /* ═══ Downloader Card ═══ */
+    .downloader-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 40px;
+      max-width: 740px;
+      margin: 0 auto;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.04) inset;
+      animation: fadeUp 0.5s 0.2s ease both;
+    }
+    .input-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .url-input {
+      flex: 1;
+      background: var(--bg3);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-family: var(--font-b);
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .url-input::placeholder { color: var(--muted); }
+    .url-input:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px var(--red-glow);
+    }
+    .btn-download {
+      background: var(--red);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 16px 28px;
+      font-family: var(--font-h);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-download:hover {
+      background: var(--red-d);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(230,0,35,0.4);
+    }
+    .btn-download:active { transform: translateY(0); }
+    .btn-download.loading { pointer-events: none; opacity: 0.8; }
+
+    .input-hint {
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .paste-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 4px 12px;
+      color: var(--muted);
+      font-family: var(--font-b);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .paste-btn:hover { border-color: var(--red); color: var(--red); }
+
+    /* ═══ Spinner ═══ */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2.5px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: none;
+    }
+    .btn-download.loading .spinner { display: block; }
+    .btn-download.loading .btn-icon { display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ═══ Result Area ═══ */
+    .result-area {
+      margin-top: 24px;
+      display: none;
+    }
+    .result-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .result-media {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      align-items: flex-start;
+    }
+    .result-thumb {
+      width: 120px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 10px;
+      flex-shrink: 0;
+      background: var(--bg2);
+    }
+    .result-info { flex: 1; min-width: 0; }
+    .result-type-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 8px;
+    }
+    .badge-video { background: rgba(230,0,35,0.2); color: #ff6b7a; border: 1px solid rgba(230,0,35,0.3); }
+    .badge-image { background: rgba(59,130,246,0.2); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+    .badge-gif { background: rgba(168,85,247,0.2); color: #c4b5fd; border: 1px solid rgba(168,85,247,0.3); }
+    .result-title {
+      font-family: var(--font-h);
+      font-weight: 700;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    .result-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .download-options {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .dl-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--red);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-family: var(--font-b);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .dl-btn:hover { background: var(--red-d); transform: translateY(-1px); }
+    .dl-btn.secondary {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .dl-btn.secondary:hover { border-color: var(--red); color: var(--red); }
+
+    /* ═══ Error ═══ */
+    .error-msg {
+      background: rgba(230,0,35,0.08);
+      border: 1px solid rgba(230,0,35,0.25);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #ff8a95;
+      display: none;
+      margin-top: 16px;
+      align-items: center;
+      gap: 10px;
+    }
+    .error-msg svg { flex-shrink: 0; }
+
+    /* ═══ Trust Badges ═══ */
+    .trust-row {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 48px;
+      animation: fadeUp 0.5s 0.3s ease both;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .trust-item svg { color: #4ade80; }
+
+    /* ═══ Stats Bar ═══ */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      flex-wrap: wrap;
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 60px 0;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: var(--font-h);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--red);
+      display: block;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-label { font-size: 0.85rem; color: var(--muted); }
+
+    /* ═══ How To Section ═══ */
+    .section { padding: 60px 0; }
+    .section-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: var(--font-h);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 48px;
+      line-height: 1.1;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .step-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .step-card:hover { border-color: rgba(230,0,35,0.3); transform: translateY(-3px); }
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--red), transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .step-card:hover::before { opacity: 1; }
+    .step-num {
+      font-family: var(--font-h);
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: rgba(230,0,35,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .step-title {
+      font-family: var(--font-h);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .step-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ═══ Features Grid ═══ */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .feature-card:hover { border-color: rgba(230,0,35,0.3); }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: rgba(230,0,35,0.1);
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      font-size: 1.4rem;
+    }
+    .feature-title {
+      font-family: var(--font-h);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .feature-desc { font-size: 0.86rem; color: var(--muted); line-height: 1.7; }
+
+    /* ═══ FAQ ═══ */
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-family: var(--font-b);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-align: left;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-q .chevron {
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .faq-item.open .chevron { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; }
+    .faq-a-inner {
+      padding: 0 24px 20px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.8;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    /* ═══ Footer ═══ */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      margin-top: 80px;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.82rem; color: var(--muted); }
+
+    /* ═══ Animations ═══ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in { animation: fadeUp 0.4s ease both; }
+
+    /* ═══ Responsive ═══ */
+    @media(max-width: 640px) {
+      .downloader-card { padding: 24px 18px; }
+      .input-group { flex-direction: column; }
+      .btn-download { justify-content: center; }
+      .result-media { flex-direction: column; }
+      .result-thumb { width: 100%; height: 180px; }
+      .stats-bar { gap: 36px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ═══ Navbar ═══ -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </div>
+        Pin<span>Save</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#how-to">How to Use</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══ Hero ═══ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">✦ 100% Free &amp; No Registration Required</div>
+
+      <h1>Download Pinterest<br /><span class="accent">Videos &amp; GIFs</span><br />Instantly</h1>
+      <p class="hero-sub">
+        Paste any Pinterest pin URL and download your video, GIF, or image in HD quality — no watermark, no signup, completely free.
+      </p>
+
+      <!-- Main Downloader Card -->
+      <div class="downloader-card">
+        <div class="input-group">
+          <input
+            type="url"
+            class="url-input"
+            id="pinUrl"
+            placeholder="Paste Pinterest link here... (e.g. https://pinterest.com/pin/...)"
+            autocomplete="off"
+          />
+          <button class="btn-download" id="downloadBtn" onclick="handleDownload()">
+            <span class="btn-icon">
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </span>
+            <div class="spinner"></div>
+            Download
+          </button>
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+          <p class="input-hint">
+            Supports: pin.it links &amp; full Pinterest URLs
+          </p>
+          <button class="paste-btn" onclick="pasteFromClipboard()">
+            📋 Paste URL
+          </button>
+        </div>
+
+        <!-- Error Message -->
+        <div class="error-msg" id="errorMsg">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="errorText">An error occurred.</span>
+        </div>
+
+        <!-- Result Area -->
+        <div class="result-area" id="resultArea">
+          <div class="result-card">
+            <div class="result-media">
+              <img class="result-thumb" id="resultThumb" src="" alt="Pin thumbnail" />
+              <div class="result-info">
+                <span class="result-type-badge" id="resultBadge">Video</span>
+                <div class="result-title" id="resultTitle">Loading...</div>
+                <div class="result-desc" id="resultDesc"></div>
+              </div>
+            </div>
+            <div class="download-options" id="downloadOptions"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Row -->
+      <div class="trust-row">
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          No watermark
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          HD quality
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          No login needed
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          Works on all devices
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          100% Free forever
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Stats Bar ═══ -->
+  <div class="container">
+    <div class="stats-bar">
+      <div class="stat">
+        <span class="stat-num" data-target="5000000">0</span>
+        <div class="stat-label">Videos Downloaded</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-target="200000">0</span>
+        <div class="stat-label">Happy Users</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-suffix="s" data-target="3">0</span>
+        <div class="stat-label">Average Speed</div>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-suffix="%" data-target="100">0</span>
+        <div class="stat-label">Free Forever</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ How To Use ═══ -->
+  <section class="section" id="how-to">
+    <div class="container">
+      <div class="section-label">Simple Steps</div>
+      <h2>How to Download<br />Pinterest Videos</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-title">Open Pinterest Pin</div>
+          <p class="step-desc">Open the Pinterest app or website and find the video or GIF you want to download. Tap on the pin to open it.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-title">Copy the Pin URL</div>
+          <p class="step-desc">Tap the share button on the pin and copy the link. It will look like pinterest.com/pin/... or a short pin.it link.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-title">Paste &amp; Click Download</div>
+          <p class="step-desc">Paste the copied URL in the input box above and click the Download button. Our tool will fetch the media instantly.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-title">Save to Device</div>
+          <p class="step-desc">Choose your preferred quality and click the download link. The video or image will be saved directly to your device.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Features ═══ -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-label">Why Choose Us</div>
+      <h2>Everything You Need<br />in One Tool</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🎬</div>
+          <div class="feature-title">HD Video Download</div>
+          <p class="feature-desc">Download Pinterest videos in the highest available quality — 720p HD. Get crystal clear videos without any compression.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎞️</div>
+          <div class="feature-title">GIF &amp; Image Support</div>
+          <p class="feature-desc">Not just videos — download Pinterest GIFs, animated pins, and high-resolution images in their original quality.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">Lightning Fast</div>
+          <p class="feature-desc">Our servers process your request in seconds. No waiting in queues or slow loading times — instant results every time.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-title">Private &amp; Secure</div>
+          <p class="feature-desc">We don't store your URLs or downloaded files. Everything is processed in real-time and nothing is saved on our servers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <div class="feature-title">Works on All Devices</div>
+          <p class="feature-desc">Use PinSave on your iPhone, Android, tablet, or computer — no app download needed. It works right in your browser.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🆓</div>
+          <div class="feature-title">Completely Free</div>
+          <p class="feature-desc">PinSave is 100% free with no hidden fees, no premium plans, and no daily download limits. Download as much as you want.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SEO Content ═══ -->
+  <section class="section">
+    <div class="container">
+      <div style="max-width: 720px;">
+        <div class="section-label">About PinSave</div>
+        <h2 style="margin-bottom: 24px;">The Best Pinterest<br />Video Downloader Online</h2>
+        <div style="font-size: 0.95rem; color: var(--muted); line-height: 1.9; display: flex; flex-direction: column; gap: 16px;">
+          <p>
+            <strong style="color: var(--text);">PinSave</strong> is a free, browser-based Pinterest video downloader that lets you save any public Pinterest video, GIF, or image to your device in seconds. Whether you're on a phone, tablet, or desktop, our tool works seamlessly without requiring any software installation or account registration.
+          </p>
+          <p>
+            Pinterest is one of the world's most popular visual discovery platforms, hosting millions of inspiring videos and images. However, Pinterest doesn't provide a native download feature for videos. That's where PinSave comes in — we make it incredibly easy to download Pinterest videos so you can enjoy them offline, share them with friends, or use them for creative projects.
+          </p>
+          <p>
+            Our Pinterest downloader supports all types of Pinterest content: standard videos, looping videos (GIFs), short-form videos, and high-resolution images. We continuously update our tool to keep up with Pinterest's latest changes to ensure reliable downloads every time.
+          </p>
+          <p>
+            <strong style="color: var(--text);">Please note:</strong> Only download content you have the right to use. Always respect the original creator's copyright and Pinterest's Terms of Service. PinSave is intended for personal use only.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div style="max-width: 720px; margin: 0 auto;">
+        <div class="section-label">FAQ</div>
+        <h2 style="margin-bottom: 32px;">Frequently Asked<br />Questions</h2>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              How do I download a Pinterest video?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Copy the URL of any Pinterest pin from the Pinterest app or website, paste it into the input field at the top of this page, and click the Download button. Select your preferred quality and save the file to your device.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Is PinSave completely free to use?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Yes, PinSave is 100% free to use with no hidden charges, no premium tiers, and no download limits. You can download as many Pinterest videos as you want without paying anything or even creating an account.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              What types of Pinterest content can I download?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">PinSave supports downloading Pinterest videos (.mp4), GIFs (animated pins), and still images (.jpg, .png, .webp). Simply paste the pin URL and our tool will detect the media type automatically.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Can I download private Pinterest pins?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">No. PinSave can only download publicly available Pinterest pins. Private pins require authentication and we do not access your Pinterest account. Only download content you have permission to download.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Does the downloaded video have a watermark?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Absolutely not. PinSave downloads the original video file directly from Pinterest's servers without adding any watermark or branding. You get a clean, original video file.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Why is my download not working?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Make sure the pin is public and the URL is correct. Sometimes Pinterest changes its page structure which may temporarily affect our tool. If you keep having issues, try a different pin URL or clear your browser cache and try again.</div></div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-q" onclick="toggleFaq(this)">
+              Is it legal to download Pinterest videos?
+              <svg class="chevron" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+            </button>
+            <div class="faq-a"><div class="faq-a-inner">Downloading Pinterest content for personal use is generally acceptable, but redistributing or commercially using content you don't own may infringe copyright laws. Always ensure you have the right to use the content you download and respect the original creator's rights.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </div>
+          Pin<span>Save</span>
+        </div>
+        <div class="footer-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Contact</a>
+        </div>
+        <p class="footer-copy">© 2025 PinSave. Not affiliated with Pinterest, Inc.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ JavaScript ═══ -->
+  <script>
+    // ── Counter Animation ─────────────────────────────────────────────────────
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const duration = 2000;
+      const step = target / (duration / 16);
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        if (current >= 1000000) {
+          el.textContent = (current / 1000000).toFixed(1) + 'M' + suffix;
+        } else if (current >= 1000) {
+          el.textContent = (current / 1000).toFixed(0) + 'K' + suffix;
+        } else {
+          el.textContent = Math.floor(current) + suffix;
+        }
+        if (current >= target) clearInterval(timer);
+      }, 16);
+    }
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateCounter(e.target);
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-target]').forEach(el => observer.observe(el));
+
+    // ── FAQ Toggle ────────────────────────────────────────────────────────────
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    // ── Paste from Clipboard ──────────────────────────────────────────────────
+    async function pasteFromClipboard() {
+      try {
+        const text = await navigator.clipboard.readText();
+        document.getElementById('pinUrl').value = text;
+      } catch {
+        document.getElementById('pinUrl').focus();
+      }
+    }
+
+    // ── Main Download Handler ─────────────────────────────────────────────────
+    async function handleDownload() {
+      const url = document.getElementById('pinUrl').value.trim();
+      const btn = document.getElementById('downloadBtn');
+      const errorMsg = document.getElementById('errorMsg');
+      const resultArea = document.getElementById('resultArea');
+
+      // Reset state
+      errorMsg.style.display = 'none';
+      resultArea.style.display = 'none';
+
+      if (!url) {
+        showError('Please paste a Pinterest URL first.');
+        return;
+      }
+
+      // Set loading
+      btn.classList.add('loading');
+      btn.querySelector('span:not(.spinner)') && null;
+
+      try {
+        const response = await fetch('/api/download', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+
+        const json = await response.json();
+
+        if (!response.ok || !json.success) {
+          throw new Error(json.error || 'Failed to fetch media.');
+        }
+
+        displayResult(json.data);
+
+      } catch (err) {
+        showError(err.message || 'Something went wrong. Please try again.');
+      } finally {
+        btn.classList.remove('loading');
+      }
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      document.getElementById('errorText').textContent = msg;
+      el.style.display = 'flex';
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function displayResult(data) {
+      const resultArea = document.getElementById('resultArea');
+
+      // Thumbnail
+      const thumb = document.getElementById('resultThumb');
+      if (data.thumbnail) {
+        thumb.src = data.thumbnail;
+        thumb.style.display = 'block';
+      } else {
+        thumb.style.display = 'none';
+      }
+
+      // Badge
+      const badge = document.getElementById('resultBadge');
+      badge.textContent = data.type.toUpperCase();
+      badge.className = 'result-type-badge badge-' + data.type;
+
+      // Title & desc
+      document.getElementById('resultTitle').textContent = data.title || 'Pinterest Pin';
+      document.getElementById('resultDesc').textContent = data.description || '';
+
+      // Build download buttons
+      const opts = document.getElementById('downloadOptions');
+      opts.innerHTML = '';
+
+      if (data.type === 'video' && data.videos && data.videos.length > 0) {
+        // Primary download button
+        const btn = buildDlBtn('⬇ Download Video (HD)', buildProxyUrl(data.videos[0], 'pinterest-video.mp4'));
+        opts.appendChild(btn);
+
+        // Quality options if multiple
+        if (data.qualities && data.qualities.length > 1) {
+          data.qualities.slice(1).forEach(q => {
+            const b = buildDlBtn(q.label, buildProxyUrl(q.url, 'pinterest-video.mp4'), true);
+            opts.appendChild(b);
+          });
+        }
+      } else if (data.images && data.images.length > 0) {
+        const ext = data.type === 'gif' ? 'gif' : 'jpg';
+        const btn = buildDlBtn('⬇ Download ' + (data.type === 'gif' ? 'GIF' : 'Image'), buildProxyUrl(data.images[0], 'pinterest-image.' + ext));
+        opts.appendChild(btn);
+
+        if (data.images.length > 1) {
+          const b = buildDlBtn('View Original', data.images[0], true);
+          b.target = '_blank';
+          opts.appendChild(b);
+        }
+      }
+
+      resultArea.style.display = 'block';
+      resultArea.classList.add('fade-in');
+      resultArea.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function buildProxyUrl(mediaUrl, filename) {
+      return `/api/proxy?url=${encodeURIComponent(mediaUrl)}&filename=${encodeURIComponent(filename)}`;
+    }
+
+    function buildDlBtn(label, href, secondary = false) {
+      const a = document.createElement('a');
+      a.href = href;
+      a.className = 'dl-btn' + (secondary ? ' secondary' : '');
+      a.textContent = label;
+      a.download = '';
+      return a;
+    }
+
+    // ── Enter key support ─────────────────────────────────────────────────────
+    document.getElementById('pinUrl').addEventListener('keydown', e => {
+      if (e.key === 'Enter') handleDownload();
+    });
+
+    // ── Auto-paste on focus if clipboard has pinterest URL ────────────────────
+    document.getElementById('pinUrl').addEventListener('focus', async () => {
+      if (document.getElementById('pinUrl').value) return;
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text && (text.includes('pinterest.com') || text.includes('pin.it'))) {
+          document.getElementById('pinUrl').value = text;
+        }
+      } catch (_) {}
+    });
+  </script>
+</body>
+</html>

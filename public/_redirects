@@ -1,0 +1,4 @@
+# Cloudflare Pages Redirects
+
+# SPA fallback — serve index.html for all non-API routes
+/*    /index.html    200
