@@ -84,6 +84,11 @@ body::before {
   color: var(--muted); font-size: 0.85rem; font-weight: 500;
   transition: border-color .2s, color .2s;
 }
+/* Language Menu dikhane ke liye class */
+.lang-menu.show {
+    display: flex !important;
+    flex-direction: column;
+}
 .lang-btn:hover { border-color: var(--red); color: var(--text); }
 .lang-btn svg { width: 14px; height: 14px; }
 .lang-menu {
