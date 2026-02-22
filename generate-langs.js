@@ -755,10 +755,13 @@ function html(l) {
 }
 
 // Write all files
+// Write all files
+let count = 0;
 for (const l of langs) {
-  const dir = path.join(__dirname, l.code); // "public" hata diya
+  const dir = path.join(__dirname, l.code);
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, "index.html"), html(l), "utf8");
   count++;
   process.stdout.write(`\r✓ Generated ${count}/${langs.length}: /${l.code}/`);
 }
+console.log(`\n\n✅ All ${count} language pages generated!`);
