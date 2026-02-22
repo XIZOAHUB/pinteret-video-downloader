@@ -173,4 +173,23 @@
     return a;
   }
 
-})();
+// Language Menu Toggle Code
+document.addEventListener("DOMContentLoaded", () => {
+    const langBtn = document.getElementById("langBtn");
+    const langMenu = document.getElementById("langMenu");
+
+    if (langBtn && langMenu) {
+        // Button par click karne se menu khulega/band hoga
+        langBtn.addEventListener("click", (e) => {
+            e.stopPropagation(); // Click ko bahar jaane se rokna
+            langMenu.classList.toggle("show");
+        });
+
+        // Agar koi screen par kahin aur click kare, toh menu band ho jaye
+        document.addEventListener("click", (e) => {
+            if (!langMenu.contains(e.target) && e.target !== langBtn) {
+                langMenu.classList.remove("show");
+            }
+        });
+    }
+});
