@@ -17,17 +17,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="/assets/style.css"/>
+
+<style>
+  .lang-menu.open {
+    display: flex !important;
+    flex-direction: column;
+  }
+</style>
+
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <div class="wrap nav-inner">
     <a href="/" class="logo">
       <div class="logo-dot"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.43 7.63 11.17-.11-.95-.2-2.4.04-3.44.22-.94 1.41-5.97 1.41-5.97s-.36-.72-.36-1.78c0-1.67.97-2.91 2.17-2.91 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-.99 4-.28 1.19.6 2.17 1.78 2.17 2.13 0 3.77-2.25 3.77-5.5 0-2.87-2.06-4.88-5.01-4.88-3.41 0-5.42 2.56-5.42 5.21 0 1.03.4 2.14.89 2.74.1.12.11.22.08.34l-.33 1.36c-.05.22-.17.27-.4.16-1.5-.7-2.44-2.89-2.44-4.65 0-3.78 2.75-7.26 7.93-7.26 4.16 0 7.4 2.97 7.4 6.93 0 4.14-2.61 7.46-6.23 7.46-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15C9.57 23.81 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></div>
       Pin<span>Save</span>
     </a>
-    <!-- Language Menu -->
     <div class="lang-wrap">
       <button class="lang-btn" id="langBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
@@ -85,14 +91,12 @@
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
   <div class="wrap">
     <div class="badge anim">✦ 100% Free · No Registration</div>
     <h1 class="anim anim-d1">Download Pinterest<br/><em>Videos & GIFs</em> Free</h1>
     <p class="sub anim anim-d2">Paste any Pinterest link and save videos, GIFs or images in HD — no watermark, no account needed.</p>
 
-    <!-- Downloader Card -->
     <div class="card anim anim-d3">
       <div class="input-row">
         <input type="url" id="pinUrl" class="url-input" placeholder="Paste Pinterest link here… (pinterest.com/pin/… or pin.it/…)" autocomplete="off" autocorrect="off"/>
@@ -107,13 +111,11 @@
         <button class="paste-btn" onclick="pasteUrl()">📋 Paste</button>
       </div>
 
-      <!-- Error -->
       <div class="err" id="errBox">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="errTxt"></span>
       </div>
 
-      <!-- Result -->
       <div class="result" id="resBox">
         <div class="result-inner">
           <div class="result-top">
@@ -129,7 +131,6 @@
       </div>
     </div>
 
-    <!-- Trust -->
     <div class="trust">
       <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>No watermark</div>
       <div class="trust-item"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>HD quality</div>
@@ -140,7 +141,6 @@
   </div>
 </section>
 
-<!-- HOW TO -->
 <section class="section" id="how-to">
   <div class="wrap">
     <h2>How to Download Pinterest Videos</h2>
@@ -153,7 +153,6 @@
   </div>
 </section>
 
-<!-- FEATURES -->
 <section class="section" id="features">
   <div class="wrap">
     <h2>Why Use PinSave?</h2>
@@ -168,7 +167,6 @@
   </div>
 </section>
 
-<!-- SEO CONTENT -->
 <section class="section">
   <div class="wrap">
     <div class="seo-block">
@@ -181,7 +179,6 @@
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="section" id="faq">
   <div class="wrap">
     <h2 style="text-align:center;margin-bottom:28px">Frequently Asked Questions</h2>
@@ -196,7 +193,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="wrap foot-inner">
     <a href="/" class="logo">
@@ -215,5 +211,27 @@
 
 <script>window.T={err_empty:"Please paste a Pinterest URL.",err_fail:"Could not download. Please try again.",err_server:"Server error. Please try again.",btn_hd:"Download HD",btn_img:"Download Image",btn_open:"Open in Browser"};</script>
 <script src="/assets/app.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const langBtn = document.getElementById("langBtn");
+    const langMenu = document.getElementById("langMenu");
+
+    if (langBtn && langMenu) {
+      langBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        langMenu.classList.toggle("open");
+      });
+
+      document.addEventListener("click", function(e) {
+        if (!langBtn.contains(e.target) && !langMenu.contains(e.target)) {
+          langMenu.classList.remove("open");
+        }
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
