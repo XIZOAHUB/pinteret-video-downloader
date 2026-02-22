@@ -16,13 +16,174 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"PinSave Pinterest Video Downloader","description":"Free online tool to download Pinterest videos, GIFs and images in HD.","url":"https://pindown.xizoa.com","applicationCategory":"MultimediaApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/assets/style.css"/>
 
 <style>
-  .lang-menu.open {
-    display: flex !important;
-    flex-direction: column;
-  }
+/* ═══════════════════════════════════════════════
+   PinSave — Shared Stylesheet (Inlined)
+═══════════════════════════════════════════════ */
+:root {
+  --red: #e60023;
+  --red-dark: #ad081b;
+  --red-glow: rgba(230,0,35,0.18);
+  --bg: #0e0e10;
+  --bg2: #18181c;
+  --bg3: #222228;
+  --border: rgba(255,255,255,0.08);
+  --text: #f2efe9;
+  --muted: #8b8795;
+  --white: #fff;
+  --radius: 14px;
+  --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font); background: var(--bg); color: var(--text);
+  line-height: 1.6; overflow-x: hidden; min-height: 100vh;
+}
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: inherit; }
+
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 70% 60% at 15% 5%, rgba(230,0,35,0.09) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 40% at 85% 85%, rgba(230,0,35,0.06) 0%, transparent 55%);
+  pointer-events: none;
+}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--red); border-radius: 3px; }
+
+.wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(14,14,16,0.88); backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 16px; }
+.logo { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 1.2rem; letter-spacing: -0.03em; flex-shrink: 0; }
+.logo-dot { width: 30px; height: 30px; background: var(--red); border-radius: 50%; display: grid; place-items: center; }
+.logo-dot svg { fill: white; width: 16px; height: 16px; }
+.logo span { color: var(--red); }
+
+/* LANGUAGE MENU CSS SE SATH FIX */
+.lang-wrap { position: relative; }
+.lang-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 7px 12px;
+  color: var(--muted); font-size: 0.85rem; font-weight: 500;
+  transition: border-color .2s, color .2s;
+}
+.lang-btn:hover { border-color: var(--red); color: var(--text); }
+.lang-btn svg { width: 14px; height: 14px; pointer-events: none; }
+.lang-menu {
+  position: absolute; top: calc(100% + 6px); right: 0;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 8px;
+  min-width: 200px; max-height: 340px; overflow-y: auto;
+  display: none; z-index: 200; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.lang-menu.open { display: flex !important; flex-direction: column; }
+.lang-menu a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 8px;
+  font-size: 0.85rem; color: var(--muted);
+  transition: background .15s, color .15s; white-space: nowrap;
+}
+.lang-menu a:hover { background: var(--bg3); color: var(--text); }
+.lang-menu a.active { color: var(--red); font-weight: 600; }
+
+.hero { padding: 70px 0 40px; text-align: center; }
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: rgba(230,0,35,0.09); border: 1px solid rgba(230,0,35,0.25);
+  border-radius: 100px; padding: 5px 14px;
+  font-size: 0.78rem; font-weight: 600; color: #ff6b7a; margin-bottom: 24px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.badge::before { content: ''; width: 6px; height: 6px; background: var(--red); border-radius: 50%; animation: blink 1.5s ease-in-out infinite; }
+@keyframes blink { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:.4; transform:scale(1.4); } }
+h1 { font-size: clamp(2rem, 5.5vw, 3.8rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 16px; }
+h1 em { color: var(--red); font-style: normal; }
+.sub { font-size: clamp(.95rem, 2vw, 1.1rem); color: var(--muted); max-width: 520px; margin: 0 auto 40px; font-weight: 400; }
+
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: 22px; padding: 36px; max-width: 720px; margin: 0 auto; box-shadow: 0 28px 70px rgba(0,0,0,0.35); }
+.input-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.url-input { flex: 1; background: var(--bg3); border: 1.5px solid var(--border); border-radius: 11px; padding: 15px 18px; font-size: 0.95rem; color: var(--text); outline: none; }
+.url-input:focus { border-color: var(--red); box-shadow: 0 0 0 3px var(--red-glow); }
+.dl-btn { background: var(--red); color: #fff; border: none; border-radius: 11px; padding: 15px 26px; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+.dl-btn.busy { pointer-events: none; opacity: .75; }
+.spinner { width: 17px; height: 17px; border: 2.5px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; display: none; }
+.dl-btn.busy .spinner { display: block; }
+.dl-btn.busy .ico { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hint-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.hint { font-size: .8rem; color: var(--muted); }
+.paste-btn { background: none; border: 1px solid var(--border); border-radius: 7px; padding: 4px 11px; color: var(--muted); font-size: .8rem; }
+.err { display: none; align-items: center; gap: 10px; background: rgba(230,0,35,.08); border: 1px solid rgba(230,0,35,.22); border-radius: 11px; padding: 13px 16px; color: #ff8a95; font-size: .88rem; margin-top: 14px; }
+.err svg { width: 18px; height: 18px; }
+
+.result { margin-top: 20px; display: none; }
+.result-inner { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+.result-top { display: flex; gap: 18px; padding: 18px; align-items: flex-start; }
+.thumb { width: 110px; height: 82px; object-fit: cover; border-radius: 9px; flex-shrink: 0; background: var(--bg2); }
+.meta { flex: 1; min-width: 0; }
+.type-badge { display: inline-block; font-size: .7rem; font-weight: 700; padding: 3px 9px; border-radius: 100px; margin-bottom: 7px; }
+.tv { background: rgba(230,0,35,.18); color: #ff6b7a; border: 1px solid rgba(230,0,35,.3); }
+.result-title { font-weight: 700; font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.result-desc { font-size: .8rem; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.result-btns { display: flex; flex-wrap: wrap; gap: 9px; padding: 14px 18px; border-top: 1px solid var(--border); }
+.dlink { display: inline-flex; align-items: center; gap: 7px; background: var(--red); color: #fff; border: none; border-radius: 9px; padding: 9px 16px; font-size: .87rem; font-weight: 600; }
+.dlink.alt { background: var(--bg2); border: 1px solid var(--border); color: var(--text); }
+
+.trust { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px 32px; margin-top: 36px; }
+.trust-item { display: flex; align-items: center; gap: 7px; font-size: .82rem; color: var(--muted); font-weight: 500; }
+.trust-item svg { color: #4ade80; width: 14px; height: 14px; }
+
+.section { padding: 56px 0; }
+h2 { font-size: clamp(1.6rem,3.5vw,2.4rem); font-weight: 800; margin-bottom: 36px; }
+.steps, .feats { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 20px; }
+.step, .feat { background: var(--bg2); border: 1px solid var(--border); border-radius: 18px; padding: 28px 24px; position: relative; }
+.step-n { font-size: 3rem; font-weight: 800; color: rgba(230,0,35,.13); line-height:1; margin-bottom:14px; }
+.step-t, .feat-t { font-weight: 700; font-size: .98rem; margin-bottom: 8px; }
+.step-d, .feat-d { font-size: .84rem; color: var(--muted); line-height: 1.7; }
+.feat-ico { font-size: 1.6rem; margin-bottom: 14px; }
+
+.faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 700px; margin: 0 auto; }
+.faq-item { background: var(--bg2); border: 1px solid var(--border); border-radius: 13px; overflow: hidden; }
+.faq-q { width: 100%; background: none; border: none; color: var(--text); font-size: .92rem; font-weight: 500; text-align: left; padding: 18px 22px; display: flex; justify-content: space-between; align-items: center; }
+.faq-q .chev { transition: transform .3s; }
+.faq-item.on .chev { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.faq-item.on .faq-a { max-height: 240px; }
+.faq-body { padding: 0 22px 18px; border-top: 1px solid var(--border); padding-top: 14px; font-size: .85rem; color: var(--muted); line-height: 1.85; }
+
+.seo-block { max-width: 700px; }
+.seo-block p { font-size: .92rem; color: var(--muted); margin-bottom: 14px; }
+.seo-block strong { color: var(--text); }
+
+footer { border-top: 1px solid var(--border); padding: 40px 0; margin-top: 60px; }
+.foot-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; }
+.foot-links { display: flex; gap: 22px; font-size: .83rem; color: var(--muted); }
+.copy { font-size: .8rem; color: var(--muted); }
+
+@media(max-width:620px) {
+  .card { padding: 22px 16px; }
+  .input-row { flex-direction: column; }
+  .dl-btn { justify-content: center; }
+  .result-top { flex-direction: column; }
+  .thumb { width: 100%; height: 160px; }
+  .foot-inner { flex-direction: column; text-align: center; }
+  .foot-links { justify-content: center; }
+}
+
+.anim { animation: fadeUp .45s ease both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+.anim-d1 { animation-delay: .08s; } .anim-d2 { animation-delay: .16s; } .anim-d3 { animation-delay: .24s; }
 </style>
 
 </head>
@@ -34,6 +195,7 @@
       <div class="logo-dot"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.16 9.43 7.63 11.17-.11-.95-.2-2.4.04-3.44.22-.94 1.41-5.97 1.41-5.97s-.36-.72-.36-1.78c0-1.67.97-2.91 2.17-2.91 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-.99 4-.28 1.19.6 2.17 1.78 2.17 2.13 0 3.77-2.25 3.77-5.5 0-2.87-2.06-4.88-5.01-4.88-3.41 0-5.42 2.56-5.42 5.21 0 1.03.4 2.14.89 2.74.1.12.11.22.08.34l-.33 1.36c-.05.22-.17.27-.4.16-1.5-.7-2.44-2.89-2.44-4.65 0-3.78 2.75-7.26 7.93-7.26 4.16 0 7.4 2.97 7.4 6.93 0 4.14-2.61 7.46-6.23 7.46-1.22 0-2.36-.63-2.75-1.38l-.75 2.85c-.27 1.04-1 2.35-1.49 3.15C9.57 23.81 10.76 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></div>
       Pin<span>Save</span>
     </a>
+    
     <div class="lang-wrap">
       <button class="lang-btn" id="langBtn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
@@ -110,12 +272,10 @@
         <span class="hint">Supports: pinterest.com & pin.it short links</span>
         <button class="paste-btn" onclick="pasteUrl()">📋 Paste</button>
       </div>
-
       <div class="err" id="errBox">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span id="errTxt"></span>
       </div>
-
       <div class="result" id="resBox">
         <div class="result-inner">
           <div class="result-top">
@@ -209,10 +369,10 @@
   </div>
 </footer>
 
-<script>window.T={err_empty:"Please paste a Pinterest URL.",err_fail:"Could not download. Please try again.",err_server:"Server error. Please try again.",btn_hd:"Download HD",btn_img:"Download Image",btn_open:"Open in Browser"};</script>
-<script src="/assets/app.js"></script>
-
 <script>
+  window.T={err_empty:"Please paste a Pinterest URL.",err_fail:"Could not download. Please try again.",err_server:"Server error. Please try again.",btn_hd:"Download HD",btn_img:"Download Image",btn_open:"Open in Browser"};
+
+  // ── Language Menu Logic ───────────────────────────────────────────
   document.addEventListener("DOMContentLoaded", function() {
     const langBtn = document.getElementById("langBtn");
     const langMenu = document.getElementById("langMenu");
@@ -230,7 +390,144 @@
         }
       });
     }
+    
+    // ── FAQ accordion ───────────────────────────────────────────────────
+    document.querySelectorAll(".faq-q").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const item = btn.parentElement;
+        const isOpen = item.classList.contains("on");
+        document.querySelectorAll(".faq-item.on").forEach(el => el.classList.remove("on"));
+        if (!isOpen) item.classList.add("on");
+      });
+    });
   });
+
+  // ── Paste from clipboard ──────────────────────────────────────────────
+  window.pasteUrl = async function () {
+    try {
+      const text = await navigator.clipboard.readText();
+      const input = document.getElementById("pinUrl");
+      if (input) input.value = text;
+    } catch {
+      document.getElementById("pinUrl")?.focus();
+    }
+  };
+
+  // ── Auto-paste Pinterest URL ──────────────────────────────────────────
+  const pinInput = document.getElementById("pinUrl");
+  if (pinInput) {
+    pinInput.addEventListener("focus", async () => {
+      if (pinInput.value) return;
+      try {
+        const t = await navigator.clipboard.readText();
+        if (t && (t.includes("pinterest.com") || t.includes("pin.it"))) pinInput.value = t;
+      } catch (_) {}
+    });
+    pinInput.addEventListener("keydown", e => { if (e.key === "Enter") startDownload(); });
+  }
+
+  // ── Core download flow ────────────────────────────────────────────────
+  window.startDownload = async function () {
+    const input = document.getElementById("pinUrl");
+    const btn = document.getElementById("mainBtn");
+    const errEl = document.getElementById("errBox");
+    const resEl = document.getElementById("resBox");
+
+    const url = (input?.value || "").trim();
+    const T = window.T || {};
+
+    if (errEl) errEl.style.display = "none";
+    if (resEl) resEl.style.display = "none";
+    if (!url) { showErr(T.err_empty || "Please paste a Pinterest URL."); return; }
+
+    btn?.classList.add("busy");
+
+    try {
+      const res = await fetch("/api/download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+
+      let data;
+      const raw = await res.text();
+      try { data = JSON.parse(raw); }
+      catch { throw new Error(T.err_server || "Server error. Please try again."); }
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || T.err_fail || "Failed to get media. Please try again.");
+      }
+      renderResult(data.data);
+    } catch (e) {
+      showErr(e.message || (T.err_fail || "Something went wrong. Please try again."));
+    } finally {
+      btn?.classList.remove("busy");
+    }
+  };
+
+  function showErr(msg) {
+    const el = document.getElementById("errBox");
+    const txt = document.getElementById("errTxt");
+    if (!el) return;
+    if (txt) txt.textContent = msg;
+    el.style.display = "flex";
+    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function proxyUrl(mediaUrl, name) {
+    return `/api/proxy?url=${encodeURIComponent(mediaUrl)}&name=${encodeURIComponent(name)}`;
+  }
+
+  function renderResult(d) {
+    const T = window.T || {};
+    const el = document.getElementById("resBox");
+    if (!el) return;
+
+    const thumb = document.getElementById("resThumb");
+    if (thumb) { thumb.src = d.thumbnail || ""; thumb.style.display = d.thumbnail ? "block" : "none"; }
+
+    const badge = document.getElementById("resBadge");
+    if (badge) {
+      badge.textContent = d.type.toUpperCase();
+      badge.className = "type-badge " + (d.type === "video" ? "tv" : d.type === "gif" ? "tg" : "ti");
+    }
+
+    const title = document.getElementById("resTitle");
+    if (title) title.textContent = d.title || "Pinterest Pin";
+    const desc = document.getElementById("resDesc");
+    if (desc) desc.textContent = d.description || "";
+
+    const btns = document.getElementById("resBtns");
+    if (btns) {
+      btns.innerHTML = "";
+      if (d.type === "video" && d.videos?.length > 0) {
+        btns.appendChild(makeLink("⬇ " + (T.btn_hd || "Download HD"), proxyUrl(d.videos[0], "pinterest-video.mp4")));
+        if (d.qualities?.length > 1) {
+          d.qualities.slice(1).forEach(q => {
+            btns.appendChild(makeLink(q.label, proxyUrl(q.url, "pinterest-video.mp4"), true));
+          });
+        }
+        btns.appendChild(makeLink(T.btn_open || "Open in Browser", d.videos[0], true, "_blank"));
+      } else if (d.images?.length > 0) {
+        const ext = d.type === "gif" ? "gif" : "jpg";
+        btns.appendChild(makeLink("⬇ " + (T.btn_img || "Download Image"), proxyUrl(d.images[0], `pinterest-image.${ext}`)));
+        btns.appendChild(makeLink(T.btn_open || "Open in Browser", d.images[0], true, "_blank"));
+      }
+    }
+
+    el.style.display = "block";
+    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
+  function makeLink(label, href, alt = false, target = "") {
+    const a = document.createElement("a");
+    a.href = href;
+    a.className = "dlink" + (alt ? " alt" : "");
+    a.textContent = label;
+    if (!alt) a.download = "";
+    if (target) a.target = target;
+    return a;
+  }
 </script>
 
 </body>
